@@ -1,6 +1,6 @@
 var People = [
     {
-      imageUrl: './images/persona-female.png',
+      imageUrl: './/Modules/DevOffice.Fabric/images/persona-female.png',
       imageInitials: 'PV',
       primaryText: 'Annie Lindqvist',
       secondaryText: 'Designer',
@@ -8,7 +8,7 @@ var People = [
       optionalText: 'Available at 4:00pm'
     },
     {
-      imageUrl: './images/persona-female.png',
+      imageUrl: './/Modules/DevOffice.Fabric/images/persona-female.png',
       imageInitials: 'GL',
       primaryText: 'Greta Lundberg',
       secondaryText: 'Software Developer',

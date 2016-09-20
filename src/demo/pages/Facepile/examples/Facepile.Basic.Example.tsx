@@ -10,7 +10,7 @@ const facepileProps: IFacepileProps = {
   personas: [
     {
       personaName: 'Annie Lindqvist',
-      imageUrl: './images/persona-female.png'
+      imageUrl: '/Modules/DevOffice.Fabric/images/persona-female.png'
     },
     {
       personaName: 'Greta Lundberg',

@@ -15,8 +15,8 @@ export class DocumentCardBasicExample extends React.Component<any, any> {
         {
           name: 'Revenue stream proposal fiscal year 2016 version02.pptx',
           url: 'http://bing.com',
-          previewImageSrc: 'dist/document-preview.png',
-          iconSrc: 'dist/icon-ppt.png',
+          previewImageSrc: '/Modules/DevOffice.Fabric/dist/document-preview.png',
+          iconSrc: '/Modules/DevOffice.Fabric/dist/icon-ppt.png',
           imageFit: ImageFit.cover,
           width: 318,
           height: 196,
@@ -35,7 +35,7 @@ export class DocumentCardBasicExample extends React.Component<any, any> {
             activity='Created a few minutes ago'
             people={
               [
-                { name: 'Annie Lindqvist', profileImageSrc: 'images/persona-female.png' }
+                { name: 'Annie Lindqvist', profileImageSrc: '/Modules/DevOffice.Fabric/images/persona-female.png' }
               ]
             }
           />
