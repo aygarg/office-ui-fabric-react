@@ -83,6 +83,7 @@ export class ContextualMenuDirectionalExample extends React.Component<{}, IConte
           directionalHint={ directionalHint }
           gapSpace={ gapSpace }
           onDismiss={ this._onDismissMenu }
+          shouldFocusOnMount={ false }
           items={
             [
               {
