@@ -21,6 +21,7 @@ const _indentNoExpandButton: number = 20;
 export interface INavState {
   isGroupExpanded?: boolean[];
   isLinkExpandStateChanged?: boolean;
+  selectedKey?: string;
 }
 
 export class Nav extends React.Component<INavProps, INavState> implements INav {
@@ -30,15 +31,15 @@ export class Nav extends React.Component<INavProps, INavState> implements INav {
     onRenderLink: (link: INavLink) => (<span className='ms-Nav-linkText'>{ link.name }</span>)
   };
 
-  private _selectedKey: string;
   private _hasExpandButton: boolean;
 
-  constructor() {
-    super();
+  constructor(props: INavProps) {
+    super(props);
 
     this.state = {
       isGroupExpanded: [],
-      isLinkExpandStateChanged: false
+      isLinkExpandStateChanged: false,
+      selectedKey: props.initialSelectedKey
     };
     this._hasExpandButton = false;
   }
@@ -48,14 +49,11 @@ export class Nav extends React.Component<INavProps, INavState> implements INav {
       return null;
     }
 
-    if (this.props.initialSelectedKey) {
-      this._selectedKey = this.props.initialSelectedKey;
-    }
-
     // when this.props.groups[x].name is specified or Any of the link has child link, chevorn Expand/collaps button is shown,
     // different padding is needed. _hasExpandButton marks this condition.
     this._hasExpandButton = this.props.groups.some((group: INavLinkGroup, groupIndex: number) => {
-      return !!group.name || group.links && group.links.some((link: INavLink, linkIndex: number) => { return !!link.links && link.links.length > 0; });
+      return !!group && !!group.name || group.links && group.links.some((link: INavLink, linkIndex: number) => {
+        return !!link && !!link.links && link.links.length > 0; });
     });
 
     const groupElements: React.ReactElement<{}>[] = this.props.groups.map(
@@ -72,7 +70,7 @@ export class Nav extends React.Component<INavProps, INavState> implements INav {
   }
 
   public get selectedKey(): string {
-    return this._selectedKey;
+    return this.state.selectedKey;
   }
 
   private _renderAnchorLink(link: INavLink, linkIndex: number, nestingLevel: number): React.ReactElement<{}> {
@@ -111,10 +109,7 @@ export class Nav extends React.Component<INavProps, INavState> implements INav {
   }
 
   private _renderCompositeLink(link: INavLink, linkIndex: number, nestingLevel: number): React.ReactElement<{}> {
-    const isLinkSelected: boolean = _isLinkSelected(link, this._selectedKey);
-    if (isLinkSelected) {
-      this._selectedKey = link.key ? link.key : undefined;
-    }
+    const isLinkSelected: boolean = _isLinkSelected(link, this.state.selectedKey);
 
     return (
       <div key={ link.key || linkIndex }
@@ -196,19 +191,19 @@ export class Nav extends React.Component<INavProps, INavState> implements INav {
   }
 
   private _onNavAnchorLinkClicked(link: INavLink, ev: React.MouseEvent): void {
-    this._selectedKey = link.key;
-
     if (this.props.onLinkClick) {
       this.props.onLinkClick(ev, link);
     }
+
+    this.setState({ selectedKey: link.key });
   }
 
   private _onNavButtonLinkClicked(link: INavLink, ev: React.MouseEvent): void {
-    this._selectedKey = link.key;
-
     if (link.onClick) {
       link.onClick(ev, link);
     }
+
+    this.setState({ selectedKey: link.key });
   }
 }
 
