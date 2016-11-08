@@ -68,6 +68,7 @@ export class Dialog extends React.Component<IDialogProps, any> {
             <Overlay isDarkThemed={ isDarkOverlay } onClick={ isBlocking ? null : onDismiss } />
             <FocusTrapZone
               className={ css('ms-Dialog-main', this.props.containerClassName) }
+              style={ this.props.containerStyle }
               elementToFocusOnDismiss={ elementToFocusOnDismiss }
               isClickableOutsideFocusTrap={ isClickableOutsideFocusTrap ? isClickableOutsideFocusTrap : !isBlocking }
               ignoreExternalFocusing={ ignoreExternalFocusing }
